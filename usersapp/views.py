@@ -1,10 +1,14 @@
-from rest_framework import generics, status
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from usersapp.models import User
-from usersapp.serializers import UserSerializer, UserRegisterSerializer
-# from habitsapp.permissions import IsOwner
+from usersapp.serializers import UserSerializer
+from habitsapp.permissions import IsOwner
 
+
+class UserRegisterAPIView(generics.CreateAPIView):
+    """Класс для создания пользователя"""
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny]
 
 class UserListAPIView(generics.ListAPIView):
     """ Класс для вывода списка пользователей """
@@ -33,24 +37,6 @@ class UserDestroyAPIView(generics.DestroyAPIView):
     """ Класс для удаления пользователя """
 
     queryset = User.objects.all()
-
     permission_classes = [IsAuthenticated, IsOwner]
 
 
-class UsersRegistrationView(generics.CreateAPIView):
-    """
-    Сериализатор для регистрации нового пользователя.
-    """
-    queryset = User.objects.all()
-    serializer_class = UserRegisterSerializer
-
-    def post(self, request, *args, **kwargs):
-        serializer = UserRegisterSerializer(data=request.data)
-        data = {}
-        if serializer.is_valid():
-            serializer.save()
-            data['response'] = True
-            return Response(data, status=status.HTTP_200_OK)
-        else:
-            data = serializer.errors
-            return Response(data)
