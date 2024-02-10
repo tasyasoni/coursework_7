@@ -14,6 +14,7 @@ class UserListAPIView(generics.ListAPIView):
     """ Класс для вывода списка пользователей """
 
     serializer_class = UserSerializer
+    queryset = User.objects.all()
     permission_classes = [IsAuthenticated]
 
 

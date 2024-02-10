@@ -3,9 +3,9 @@ from usersapp.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
-    """Сериализатор модели  User"""
+    """Сериализатор модели User"""
     password = serializers.CharField(min_length=8, write_only=True)
-    telegram_id = serializers.IntegerField(write_only=True)
+    # telegram_id = serializers.IntegerField(write_only=True)
 
     def create(self, validated_data):
         user = User.objects.create(

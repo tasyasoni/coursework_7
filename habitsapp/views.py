@@ -7,7 +7,6 @@ from habitsapp.permissions import IsOwner
 from habitsapp.serializers import HabitSerializer
 
 
-
 class HabitCreateAPIView(generics.CreateAPIView):
     """ Создание привычки """
 
