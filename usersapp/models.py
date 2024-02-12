@@ -5,7 +5,6 @@ NULLABLE = {'blank': True, 'null': True}
 VERSION_CHOICES = ((True, 'Действующий'), (False, 'Заблокирован'))
 
 
-
 class User(AbstractUser):
     username = None
     email = models.EmailField(unique=True, verbose_name='почта')

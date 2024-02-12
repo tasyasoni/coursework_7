@@ -85,10 +85,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'coursework_7',
-        'USER': 'postgres',
-        'PASSWORD': 'Antoniya2308'
+          'ENGINE': 'django.db.backends.postgresql_psycopg2',
+          'NAME': os.getenv('POSTGRES_DB'),
+          'USER': os.getenv('POSTGRES_USER'),
+          'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
     }
 }
 
@@ -134,13 +134,13 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'usersapp.User'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' #из Джанго
-EMAIL_HOST = 'smtp.yandex.ru'  #адрес почтового сервера только для яндекс
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # из Джанго
+EMAIL_HOST = 'smtp.yandex.ru'  # адрес почтового сервера только для яндекс
 EMAIL_PORT = 465  # порт
 EMAIL_USE_SSL = True
 
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER') #почта С которой отправляются нотифаи os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')  #реальный пароль -закрыть для гитхаб, создать портальный пароль os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER')
 SERVER_EMAIL = os.getenv('EMAIL_HOST_USER')
@@ -163,22 +163,21 @@ SIMPLE_JWT = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-    "https://read-only.example.com", #'<http://localhost:8000>',  # Замените на адрес вашего фронтенд-сервера
+    "https://read-only.example.com",
     "https://read-and-write.example.com",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://read-and-write.example.com", #  Замените на адрес вашего фронтенд-сервера
-    # и добавьте адрес бэкенд-сервера (если это не вносим - в админку не можем зайти)
+    "https://read-and-write.example.com",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = False
 
 # URL-адрес брокера сообщений
-CELERY_BROKER_URL = "redis://127.0.0.1:6379" # Например, Redis, который по умолчанию работает на порту 6379
+CELERY_BROKER_URL = os.getenv('REDIS_LOCATION')
 
 # URL-адрес брокера результатов, также Redis
-CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379"
+CELERY_RESULT_BACKEND = os.getenv('REDIS_LOCATION')
 
 # Часовой пояс для работы Celery
 CELERY_TIMEZONE = "Europe/Moscow"

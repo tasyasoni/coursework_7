@@ -76,4 +76,3 @@ class HabitDestroyAPIView(generics.DestroyAPIView):
 
     queryset = Habit.objects.all()
     permission_classes = [IsAuthenticated, IsOwner]
-

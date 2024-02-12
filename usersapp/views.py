@@ -10,6 +10,7 @@ class UserRegisterAPIView(generics.CreateAPIView):
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
 
+
 class UserListAPIView(generics.ListAPIView):
     """ Класс для вывода списка пользователей """
 
@@ -39,5 +40,3 @@ class UserDestroyAPIView(generics.DestroyAPIView):
 
     queryset = User.objects.all()
     permission_classes = [IsAuthenticated, IsOwner]
-
-
