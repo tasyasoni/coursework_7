@@ -22,7 +22,8 @@ class HabitTestCase(APITestCase):
         """ тестирование создания привычки """
 
         # отправляем запрос на аутентификацию пользователя
-        response = self.client.post('/token/', {"email": "admin@yandex.ru", "password": "1234"})
+        response = self.client.post('/token/',
+                                    {"email": "admin@yandex.ru", "password": "1234"})
         self.access_token = response.json().get("access")
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.access_token}')
 

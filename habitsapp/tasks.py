@@ -19,7 +19,8 @@ def reminder_habits():
     for habit in habits:
         chat_id = habit.user.telegram_id
         print(chat_id)
-        message = f"Привет {habit.user}! Время {habit.time}. Пора идти в {habit.place} и сделать {habit.action}." f"Это займет {habit.duration} минут!"
+        message = f"Привет {habit.user}! Время {habit.time}. Пора идти в {habit.place} и сделать {habit.action}." \
+                  f"Это займет {habit.duration} минут!"
 
         try:
             response = bot.send_message(chat_id=chat_id, text=message)
