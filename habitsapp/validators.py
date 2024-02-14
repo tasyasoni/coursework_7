@@ -9,8 +9,10 @@ def validator_for_habit(value):
 
     try:
         if value['habit_is_good']:
-            if value['connected_habit'] or value['prize']:
-                raise ValidationError('У приятной привычки не может быть связанной привычки или вознаграждения')
+            if value['connected_habit']:
+                raise ValidationError('У приятной привычки не может быть связанной привычки')
+            if value['prize']:
+                raise ValidationError('У приятной привычки не может быть вознаграждения.')
     except KeyError:
         pass
 
