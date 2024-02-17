@@ -50,3 +50,14 @@ pyproject.toml - список зависимостей для проекта.
 Используется виртуальное окружение poetry
 Для запуска web-приложения используйте команду "python manage.py runserver" 
 либо через конфигурационные настройки PyCharm.
+
+Cозданы отдельные контейнеры для следующих сервисов:
+PostrgeSQL,
+Redis,
+Celery,
+Celery_beat.
+Команды:
+Применить миграции docker-compose exec app python manage.py migrate
+Собрать образ командой docker-compose build
+Запустить контейнеры командой docker-compose up 
+Либо docker-compose up -d --build
