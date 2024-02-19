@@ -10,8 +10,12 @@ services:
 
   db:
     image: postgres
-    env_file:
-      - .env
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=POSTGRES_DB=coursework_7
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_DB=coursework_7
+
     volumes:
       - pg_data:/var/lib/postgresql/data/pgdata
     ports:
@@ -26,7 +30,7 @@ services:
   app:
     build: .
     tty: true
-    command: python manage.py migrate && python manage.py runserver 0.0.0.0:8000
+    command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/Habits_tracker_Docker
     ports:
